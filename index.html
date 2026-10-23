@@ -36,8 +36,9 @@
   a:hover { text-decoration: underline; }
   .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 
+  /* ===== Navbar ===== */
   header.nav {
-    position: sticky; top: 0; z-index: 10;
+    position: sticky; top: 0; z-index: 20;
     background: color-mix(in srgb, var(--bg) 88%, transparent);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
@@ -50,18 +51,93 @@
   nav a { margin-left: 20px; color: var(--muted); font-size: 0.95rem; }
   nav a:hover { color: var(--text); text-decoration: none; }
 
-  .hero { padding: 80px 0 56px; }
-  .hero .hello { color: var(--accent); font-weight: 600; margin-bottom: 8px; }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 8px; }
-  .hero .role { font-size: 1.25rem; color: var(--muted); margin-bottom: 20px; }
-  .hero p.lead { max-width: 620px; color: var(--muted); margin-bottom: 28px; }
   .btn {
-    display: inline-block; padding: 10px 20px; border-radius: 8px;
+    display: inline-block; padding: 12px 24px; border-radius: 10px;
     background: var(--accent); color: #fff; font-weight: 600;
   }
-  .btn:hover { text-decoration: none; opacity: 0.9; }
-  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); margin-left: 8px; }
+  .btn:hover { text-decoration: none; opacity: 0.92; }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
 
+  /* ===== HERO FULL SLIDER ===== */
+  .hero {
+    position: relative; overflow: hidden;
+    min-height: calc(100vh - 56px); min-height: calc(100svh - 56px);
+    max-height: 820px; min-block-size: 560px;
+    display: flex; align-items: center;
+    color: #fff; background: #0b0d12;
+  }
+  .slides { position: absolute; inset: 0; z-index: 0; }
+  .slide {
+    position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease;
+    background: linear-gradient(135deg, var(--g1), var(--g2));
+  }
+  .slide.active { opacity: 1; z-index: 1; }
+  .slide img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .slide.active img { animation: zoom 9s ease-out forwards; }
+  @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.08); } }
+  @media (prefers-reduced-motion: reduce) {
+    .slide.active img { animation: none; }
+    .slide { transition: none; }
+  }
+  /* lapisan gelap supaya tulisan tetap terbaca di atas gambar apa pun */
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: 2;
+    background:
+      linear-gradient(90deg, rgba(8,10,16,.78) 0%, rgba(8,10,16,.45) 55%, rgba(8,10,16,.25) 100%),
+      linear-gradient(0deg, rgba(8,10,16,.55) 0%, transparent 40%);
+  }
+  .hero .wrap { position: relative; z-index: 5; width: 100%; padding-top: 48px; padding-bottom: 96px; }
+  .hero .content { max-width: 640px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px; font-size: 0.85rem;
+    background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28);
+    backdrop-filter: blur(6px); margin-bottom: 20px;
+  }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: #3fb950; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 3.8rem); line-height: 1.1; margin-bottom: 10px; }
+  .hero h1 span { color: #7db4ff; }
+  .hero .role { font-size: 1.3rem; color: rgba(255,255,255,.85); margin-bottom: 16px; }
+  .hero .lead { color: rgba(255,255,255,.8); margin-bottom: 28px; max-width: 560px; }
+  .hero .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+  .hero .btn.ghost { color: #fff; border-color: rgba(255,255,255,.5); }
+  .hero .btn.ghost:hover { background: rgba(255,255,255,.12); }
+  .stats { display: flex; flex-wrap: wrap; gap: 32px; }
+  .stats .num { font-size: 1.8rem; font-weight: 700; line-height: 1.1; }
+  .stats .lbl { font-size: 0.85rem; color: rgba(255,255,255,.75); }
+
+  .arrow {
+    position: absolute; top: 50%; z-index: 6; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.35);
+    background: rgba(0,0,0,.3); color: #fff; font-size: 1.3rem; cursor: pointer;
+    backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center;
+  }
+  .arrow:hover { background: rgba(0,0,0,.55); }
+  .arrow.prev { left: 16px; }
+  .arrow.next { right: 16px; }
+  .dots {
+    position: absolute; left: 0; right: 0; bottom: 28px; z-index: 6;
+    display: flex; justify-content: center; gap: 8px;
+  }
+  .dots button {
+    width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0; cursor: pointer;
+    background: rgba(255,255,255,.5); transition: all .25s;
+  }
+  .dots button.active { background: #fff; width: 28px; border-radius: 6px; }
+
+  @media (max-width: 640px) {
+    nav a { margin-left: 12px; font-size: 0.85rem; }
+    .hero { min-height: 640px; }
+    .hero::before {
+      background: linear-gradient(0deg, rgba(8,10,16,.85) 0%, rgba(8,10,16,.55) 60%, rgba(8,10,16,.4) 100%);
+    }
+    .arrow { display: none; }
+    .stats { gap: 22px; }
+  }
+
+  /* ===== Section lain ===== */
   section { padding: 56px 0; border-top: 1px solid var(--border); }
   section h2 { font-size: 1.6rem; margin-bottom: 8px; }
   section .sub { color: var(--muted); margin-bottom: 28px; }
@@ -112,11 +188,6 @@
   .contact li { margin-bottom: 8px; }
 
   footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
-
-  @media (max-width: 560px) {
-    nav a { margin-left: 12px; font-size: 0.85rem; }
-    .btn.ghost { margin-left: 0; margin-top: 8px; }
-  }
 </style>
 </head>
 <body>
@@ -133,19 +204,53 @@
 </header>
 
 <main id="top">
-  <div class="wrap">
-    <div class="hero">
-      <p class="hello">Halo, saya</p>
-      <h1>Achmad Budi Cahyono</h1>
-      <p class="role">IT Project Manager</p>
-      <p class="lead">
-        <!-- GANTI: tulis 2-3 kalimat tentang diri kamu -->
-        Saya mengelola project teknologi, mulai dari otomasi proses, sistem informasi,
-        hingga solusi berbasis AI, untuk meningkatkan efisiensi dan kualitas operasional.
-      </p>
-      <a class="btn" href="#project">Lihat Project</a>
-      <a class="btn ghost" href="#kontak">Hubungi Saya</a>
+
+  <!-- ===== HERO: gambar full lebar + auto slide ===== -->
+  <div class="hero" id="hero" aria-roledescription="carousel" aria-label="Galeri gambar">
+    <div class="slides">
+      <!-- Upload gambar ke folder images/ dengan nama slide1.jpg, slide2.jpg, dst.
+           Rekomendasi ukuran: 1920x1080 px (landscape), dikompres di bawah 500 KB.
+           Untuk menambah slide, salin satu blok <div class="slide"> -->
+      <div class="slide active" style="--g1:#1f3a8a;--g2:#6d28d9">
+        <img src="images/slide1.jpg" alt="Gambar 1" onerror="this.style.display='none'">
+      </div>
+      <div class="slide" style="--g1:#0f766e;--g2:#1d4ed8">
+        <img src="images/slide2.jpg" alt="Gambar 2" onerror="this.style.display='none'">
+      </div>
+      <div class="slide" style="--g1:#9a3412;--g2:#be123c">
+        <img src="images/slide3.jpg" alt="Gambar 3" onerror="this.style.display='none'">
+      </div>
+      <div class="slide" style="--g1:#166534;--g2:#0f766e">
+        <img src="images/slide4.jpg" alt="Gambar 4" onerror="this.style.display='none'">
+      </div>
     </div>
+
+    <div class="wrap">
+      <div class="content">
+        <span class="badge"><span class="dot"></span> Terbuka untuk diskusi &amp; kolaborasi</span>
+        <h1>Halo, saya <span>Achmad Budi Cahyono</span></h1>
+        <p class="role">IT Project Manager</p>
+        <p class="lead">
+          <!-- GANTI: tulis 2-3 kalimat tentang diri kamu -->
+          Saya mengelola project teknologi, mulai dari otomasi proses, sistem informasi,
+          hingga solusi berbasis AI, untuk meningkatkan efisiensi dan kualitas operasional.
+        </p>
+        <div class="cta">
+          <a class="btn" href="#project">Lihat Project</a>
+          <a class="btn ghost" href="#kontak">Hubungi Saya</a>
+        </div>
+        <div class="stats">
+          <!-- GANTI angka sesuai pencapaian kamu -->
+          <div><div class="num">5+</div><div class="lbl">Project selesai</div></div>
+          <div><div class="num">3</div><div class="lbl">Bidang keahlian</div></div>
+          <div><div class="num">10+</div><div class="lbl">Tahun pengalaman</div></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="arrow prev" id="prev" aria-label="Slide sebelumnya">&#8249;</button>
+    <button class="arrow next" id="next" aria-label="Slide berikutnya">&#8250;</button>
+    <div class="dots" id="dots"></div>
   </div>
 
   <section id="tentang">
@@ -232,7 +337,7 @@
         <!-- GANTI dengan data asli kamu -->
         <li>Email: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></li>
         <li>LinkedIn: <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener">linkedin.com/in/username</a></li>
-        <li>GitHub: <a href="https://github.com/username" target="_blank" rel="noopener">github.com/username</a></li>
+        <li>GitHub: <a href="https://github.com/budiachmadc23" target="_blank" rel="noopener">github.com/budiachmadc23</a></li>
       </ul>
     </div>
   </section>
@@ -245,6 +350,55 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // ===== Auto slider hero =====
+  (function () {
+    const hero = document.getElementById('hero');
+    const slides = hero.querySelectorAll('.slide');
+    const dotsBox = document.getElementById('dots');
+    const INTERVAL = 5000; // 5 detik, ubah di sini (dalam milidetik)
+    let i = 0, timer = null;
+
+    slides.forEach((_, n) => {
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', 'Slide ' + (n + 1));
+      b.addEventListener('click', () => { go(n); restart(); });
+      dotsBox.appendChild(b);
+    });
+    const dots = dotsBox.querySelectorAll('button');
+
+    function go(n) {
+      slides[i].classList.remove('active');
+      dots[i].classList.remove('active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('active');
+      dots[i].classList.add('active');
+    }
+    function start() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      timer = setInterval(() => go(i + 1), INTERVAL);
+    }
+    function stop() { clearInterval(timer); }
+    function restart() { stop(); start(); }
+
+    document.getElementById('prev').addEventListener('click', () => { go(i - 1); restart(); });
+    document.getElementById('next').addEventListener('click', () => { go(i + 1); restart(); });
+
+    // geser di HP
+    let x0 = null;
+    hero.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; stop(); }, { passive: true });
+    hero.addEventListener('touchend', e => {
+      if (x0 !== null) {
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 50) go(i + (dx < 0 ? 1 : -1));
+      }
+      x0 = null; start();
+    });
+
+    dots[0].classList.add('active');
+    start();
+  })();
+
+  // ===== Filter project =====
   const buttons = document.querySelectorAll('#filters button');
   const cards = document.querySelectorAll('#grid .card');
   buttons.forEach(btn => {
