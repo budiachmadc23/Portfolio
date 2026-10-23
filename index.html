@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Achmad Budi Cahyono | IT Project Manager</title>
+<meta name="description" content="Portofolio Achmad Budi Cahyono, IT Project Manager. Galeri project otomasi, AI, dan sistem informasi.">
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --surface: #ffffff;
+    --text: #1c1c1e;
+    --muted: #6b6b70;
+    --accent: #1f6feb;
+    --border: #e4e4e0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111214;
+      --surface: #1a1b1e;
+      --text: #ececec;
+      --muted: #9a9aa0;
+      --accent: #5b9dff;
+      --border: #2a2b30;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  header.nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+  header.nav .wrap {
+    display: flex; justify-content: space-between; align-items: center;
+    height: 56px;
+  }
+  .brand { font-weight: 700; color: var(--text); }
+  nav a { margin-left: 20px; color: var(--muted); font-size: 0.95rem; }
+  nav a:hover { color: var(--text); text-decoration: none; }
+
+  .hero { padding: 80px 0 56px; }
+  .hero .hello { color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin-bottom: 8px; }
+  .hero .role { font-size: 1.25rem; color: var(--muted); margin-bottom: 20px; }
+  .hero p.lead { max-width: 620px; color: var(--muted); margin-bottom: 28px; }
+  .btn {
+    display: inline-block; padding: 10px 20px; border-radius: 8px;
+    background: var(--accent); color: #fff; font-weight: 600;
+  }
+  .btn:hover { text-decoration: none; opacity: 0.9; }
+  .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--border); margin-left: 8px; }
+
+  section { padding: 56px 0; border-top: 1px solid var(--border); }
+  section h2 { font-size: 1.6rem; margin-bottom: 8px; }
+  section .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    padding: 6px 14px; border-radius: 999px; font-size: 0.9rem;
+    background: var(--surface); border: 1px solid var(--border);
+  }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+  .filters button {
+    font: inherit; font-size: 0.9rem; cursor: pointer;
+    padding: 6px 14px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  }
+  .filters button.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .grid {
+    display: grid; gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+  .card .thumb {
+    aspect-ratio: 16 / 9; background: linear-gradient(135deg, #cfe0ff, #e9e4ff);
+    display: flex; align-items: center; justify-content: center;
+    color: #5a5f7a; font-size: 0.85rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    .card .thumb { background: linear-gradient(135deg, #1e2a44, #2a2447); color: #9aa3c7; }
+  }
+  .card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card .body { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+  .card .tag { font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  .card h3 { font-size: 1.1rem; margin: 6px 0; }
+  .card p { color: var(--muted); font-size: 0.95rem; flex: 1; }
+  .card .stack { margin-top: 12px; font-size: 0.8rem; color: var(--muted); }
+  .card .result { margin-top: 10px; font-size: 0.9rem; font-weight: 600; }
+  .card.hidden { display: none; }
+
+  .contact ul { list-style: none; }
+  .contact li { margin-bottom: 8px; }
+
+  footer { padding: 32px 0; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+
+  @media (max-width: 560px) {
+    nav a { margin-left: 12px; font-size: 0.85rem; }
+    .btn.ghost { margin-left: 0; margin-top: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Achmad Budi Cahyono</a>
+    <nav>
+      <a href="#tentang">Tentang</a>
+      <a href="#project">Project</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <div class="hero">
+      <p class="hello">Halo, saya</p>
+      <h1>Achmad Budi Cahyono</h1>
+      <p class="role">IT Project Manager</p>
+      <p class="lead">
+        <!-- GANTI: tulis 2-3 kalimat tentang diri kamu -->
+        Saya mengelola project teknologi, mulai dari otomasi proses, sistem informasi,
+        hingga solusi berbasis AI, untuk meningkatkan efisiensi dan kualitas operasional.
+      </p>
+      <a class="btn" href="#project">Lihat Project</a>
+      <a class="btn ghost" href="#kontak">Hubungi Saya</a>
+    </div>
+  </div>
+
+  <section id="tentang">
+    <div class="wrap">
+      <h2>Tentang Saya</h2>
+      <p class="sub">Keahlian dan fokus kerja</p>
+      <div class="skills">
+        <!-- GANTI / TAMBAH sesuai keahlian -->
+        <span class="chip">Project Management</span>
+        <span class="chip">Business Process Automation</span>
+        <span class="chip">RPA</span>
+        <span class="chip">Computer Vision / AI</span>
+        <span class="chip">Business Requirement (BRD)</span>
+        <span class="chip">Stakeholder Management</span>
+        <span class="chip">Data &amp; Reporting</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="project">
+    <div class="wrap">
+      <h2>Galeri Project</h2>
+      <p class="sub">Beberapa project yang pernah saya kerjakan</p>
+
+      <div class="filters" id="filters">
+        <button class="active" data-filter="all">Semua</button>
+        <button data-filter="otomasi">Otomasi</button>
+        <button data-filter="ai">AI &amp; Vision</button>
+        <button data-filter="sistem">Sistem</button>
+      </div>
+
+      <div class="grid" id="grid">
+
+        <!-- ===== CONTOH PROJECT 1 (ganti isinya) ===== -->
+        <article class="card" data-cat="otomasi">
+          <div class="thumb">
+            <!-- Ganti dengan: <img src="images/project1.webp" alt="Judul project"> -->
+            Tambahkan gambar project
+          </div>
+          <div class="body">
+            <span class="tag">Otomasi</span>
+            <h3>Otomasi Proses Pengiriman (RPA)</h3>
+            <p>Mengotomatisasi pekerjaan administrasi berulang agar lebih cepat dan minim kesalahan manual.</p>
+            <div class="stack">RPA &bull; Excel &bull; Dokumen</div>
+            <div class="result">Hasil: penghematan jam kerja (isi angka umum)</div>
+          </div>
+        </article>
+
+        <!-- ===== CONTOH PROJECT 2 ===== -->
+        <article class="card" data-cat="ai">
+          <div class="thumb">Tambahkan gambar project</div>
+          <div class="body">
+            <span class="tag">AI &amp; Vision</span>
+            <h3>Deteksi Visual Berbasis AI</h3>
+            <p>Memanfaatkan kamera industri dan computer vision untuk membantu pemeriksaan kualitas di lini produksi.</p>
+            <div class="stack">Computer Vision &bull; Kamera Industri &bull; Python</div>
+            <div class="result">Hasil: deteksi lebih konsisten (isi hasil umum)</div>
+          </div>
+        </article>
+
+        <!-- ===== CONTOH PROJECT 3 ===== -->
+        <article class="card" data-cat="sistem">
+          <div class="thumb">Tambahkan gambar project</div>
+          <div class="body">
+            <span class="tag">Sistem</span>
+            <h3>Monitoring Kinerja Produksi</h3>
+            <p>Merancang konsep dan form pencatatan harian untuk memantau performa proses secara terstruktur.</p>
+            <div class="stack">Analisis Proses &bull; Form &bull; Dashboard</div>
+            <div class="result">Hasil: data lebih rapi dan mudah dilaporkan</div>
+          </div>
+        </article>
+
+        <!-- Salin blok <article> di atas untuk menambah project baru -->
+
+      </div>
+    </div>
+  </section>
+
+  <section id="kontak" class="contact">
+    <div class="wrap">
+      <h2>Kontak</h2>
+      <p class="sub">Terbuka untuk diskusi dan kolaborasi</p>
+      <ul>
+        <!-- GANTI dengan data asli kamu -->
+        <li>Email: <a href="mailto:emailkamu@example.com">emailkamu@example.com</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/username" target="_blank" rel="noopener">linkedin.com/in/username</a></li>
+        <li>GitHub: <a href="https://github.com/username" target="_blank" rel="noopener">github.com/username</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">&copy; <span id="year"></span> Achmad Budi Cahyono. Semua hak dilindungi.</div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const buttons = document.querySelectorAll('#filters button');
+  const cards = document.querySelectorAll('#grid .card');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
+      });
+    });
+  });
+</script>
+</body>
+</html>
